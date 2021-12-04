@@ -64,7 +64,7 @@ class UsersTestEdit extends React.Component {
              [name]: value
          };
          const test = Object.assign(this.current(), testUpdates)
-         this.props.testInternalUpdate(test, this.props.test.length);
+         this.props.testInternalUpdate(test, this.props.tests.internalEditTest.items.length);
 
      }
      handleInputChangeQuestion(e) {
@@ -90,7 +90,7 @@ class UsersTestEdit extends React.Component {
 
      handleCreateAnotherQuestion(e) {
          e.preventDefault();
-         this.props.testInternalCreate(this.state.tests.internalEditTest.items[this.state.tests.internalEditTest.currentIndex]);
+         this.props.testInternalCreate(new Question);
      }
 
      next(tab, e) {
@@ -200,11 +200,11 @@ class UsersTestEdit extends React.Component {
                     </TabPane>
 
                     <TabPane tabId="3">
-                        <label htmlFor="exampleText">Questions:{current.questions.length}</label>
+                        <label htmlFor="exampleText">Questions:{current.questions ? current.questions.length : 0}</label>
                         <Input index={this.props.index} className="form-control form-control-danger" type="textarea" name="value" id="value" value={this.state.textClaim} onChange={this.handleInputChangeQuestion} />
                         <AddItemBox element={Field} />
                         <button className="btn btn-lg btn-primary btn-block" onClick={this.handleCreateAnotherQuestion}>Create another question</button>
-                        <button className="btn btn-lg btn-primary btn-block" index={current.questions.length + 1} onClick={(e) => this.next('3', e)}>Next step</button>
+                        <button className="btn btn-lg btn-primary btn-block" index={current.questions ? current.questions.length + 1 : 1} onClick={(e) => this.next('3', e)}>Next step</button>
                     </TabPane>
                     <Link className="btn btn-lg btn-light btn-block" to="/tests">Cancel</Link>
                 </TabContent>

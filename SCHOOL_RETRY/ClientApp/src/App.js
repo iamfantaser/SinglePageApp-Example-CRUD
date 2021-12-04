@@ -34,11 +34,7 @@ import UsersTestEdit from './pages/examination/UsersTestEdit';
 export default function App() {
     return (
         <div>
-            <MyMenu />
             <Routes>
-                <Route path="/dashbord" element={<PrivateOutlet />}>
-                    <Route path="" element={<Private />} />
-                </Route>
                 <Route path="/users" element={<PrivateRoute><List /></PrivateRoute>} />
                 <Route path='/users/edit/:id' element={<PrivateRoute><UserForm /></PrivateRoute>} />
                 <Route exact path='/users/create' element={<PrivateRoute><UserForm /></PrivateRoute>} />
@@ -53,12 +49,6 @@ export default function App() {
     );
 }
 
-const Private = () => <div>private</div>;
-
-function PrivateOutlet() {
-    const auth = useAuth();
-    return auth ? <Outlet /> : <Navigate to="/" />;
-}
 
 function PrivateRoute({ children }) {
     const auth = useAuth();
@@ -69,7 +59,7 @@ function useAuth() {
     console.log(AuthService.isSignedIn());
     return AuthService.isSignedIn();
 }
-
+/*
 function MyMenu() {
     return (
         <nav>
@@ -80,4 +70,13 @@ function MyMenu() {
             <Link to="/dashboard">Private Using Outlet</Link>
         </nav>
     );
+    <Route path="/dashbord" element={<PrivateOutlet />}>
+                    <Route path="" element={<Private />} />
+                </Route>
+   /*function PrivateOutlet() {
+    const auth = useAuth();
+    return auth ? <Outlet /> : <Navigate to="/" />;
+    }
 }
+*/
+
